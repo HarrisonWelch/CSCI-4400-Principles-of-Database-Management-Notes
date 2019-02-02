@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>CSCI_4400_NOTES_1_22_2019.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback";
+	font-size: 14px;
+	padding: 0 12px;
+	line-height: 22px;
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	color: #4080D0;
+	text-decoration: none;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+h1 code,
+h2 code,
+h3 code,
+h4 code,
+h5 code,
+h6 code {
+	font-size: inherit;
+	line-height: auto;
+}
+
+a:hover {
+	color: #4080D0;
+	text-decoration: underline;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left: 5px solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 14px;
+	line-height: 19px;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+.mac code {
+	font-size: 12px;
+	line-height: 18px;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+/** Theming */
+
+.vscode-light,
+.vscode-light pre code {
+	color: rgb(30, 30, 30);
+}
+
+.vscode-dark,
+.vscode-dark pre code {
+	color: #DDD;
+}
+
+.vscode-high-contrast,
+.vscode-high-contrast pre code {
+	color: white;
+}
+
+.vscode-light code {
+	color: #A31515;
+}
+
+.vscode-dark code {
+	color: #D7BA7D;
+}
+
+.vscode-light pre:not(.hljs),
+.vscode-light code > div {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre:not(.hljs),
+.vscode-dark code > div {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre:not(.hljs),
+.vscode-high-contrast code > div {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+.vscode-light blockquote,
+.vscode-dark blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.vscode-high-contrast blockquote {
+	background: transparent;
+	border-color: #fff;
+}
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family:  "Meiryo", "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback";
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+</head>
+<body>
+<h1 id="csci4400notes1222019md">CSCI_4400_NOTES_1_22_2019.md</h1>
+<ul>
+<li>Data consisits of raw facts</li>
+<li>Info results in processing data reveal meaning
+<ul>
+<li>requires context</li>
+<li>Bedrock knowledge</li>
+<li>Should be accurate, relevant, and timely</li>
+</ul>
+</li>
+<li>Learn how to form info from data</li>
+</ul>
+<h2 id="what-is-a-database">What is a database</h2>
+<ul>
+<li>Shared, integrated computer that stores data
+<ul>
+<li>End-user data: raw facts of interest to end user</li>
+<li>Matadata: data about data, through which we understand data</li>
+</ul>
+</li>
+<li>DBMS
+<ul>
+<li>collection of programs</li>
+<li>Manages the database stucture</li>
+<li>Controls access to data stored</li>
+</ul>
+</li>
+</ul>
+<h2 id="why-databases">Why databases?</h2>
+<ul>
+<li>DBMS intermediary between the user and the database
+<ul>
+<li>Enables data to be processed</li>
+<li>Presents the end user with an integrated</li>
+</ul>
+</li>
+</ul>
+<h2 id="roles">Roles</h2>
+<ul>
+<li>You interact with the DBMS</li>
+<li>Many users are web user</li>
+</ul>
+<h2 id="types-of-dbs">Types of DBs</h2>
+<ul>
+<li>Single user</li>
+<li>Multiuser</li>
+<li>Location
+<ul>
+<li>Cloud</li>
+</ul>
+</li>
+<li>Purpose
+<ul>
+<li>General</li>
+<li>Discipline focused</li>
+</ul>
+</li>
+<li>Structure
+<ul>
+<li>Our data is going to be structured</li>
+</ul>
+</li>
+</ul>
+<h2 id="why-is-design-important">Why is design important</h2>
+<ul>
+<li>Focuses on design</li>
+<li>Ad-hoc is an often occurance
+<ul>
+<li>Any question, you have to be able to answer</li>
+</ul>
+</li>
+<li>Good Design</li>
+<li>Bad Design
+<ul>
+<li>difficult to trace errors</li>
+<li>may lead to poor performance</li>
+</ul>
+</li>
+</ul>
+<h2 id="evolution-of-data-processing">Evolution of Data Processing</h2>
+<ul>
+<li>Manual file systems</li>
+<li>Computer file systems
+<ul>
+<li>Data processing (DP) specialist created a computer-based system to track data and produce required reports</li>
+</ul>
+</li>
+<li>File system redux: modern tools
+<ul>
+<li>Spreadsheet</li>
+</ul>
+</li>
+</ul>
+<h2 id="terminology">Terminology</h2>
+<ul>
+<li>TERM - definition</li>
+<li>Data - raw facts</li>
+<li>Field -</li>
+<li>Record -</li>
+<li>File -</li>
+</ul>
+<h2 id="evol-of-data-processing-3-of-3">Evol of Data Processing (3 of 3)</h2>
+<ul>
+<li>Avoid info stored in more than one place</li>
+</ul>
+<h2 id="problems-of-data-dependence">problems of data dependence</h2>
+<ul>
+<li>Data dependence</li>
+<li>Data independence</li>
+</ul>
+<h2 id="data-redundancy">Data redundancy</h2>
+<ul>
+<li>What is it? ... When you store info more than one time</li>
+<li>when you look it up, it can majically change states (value)</li>
+<li>Islands of info
+<ul>
+<li>data in parts in many locations</li>
+</ul>
+</li>
+</ul>
+<h2 id="data-redundancy-pt-2">Data redundancy Pt 2</h2>
+<ul>
+<li>Results
+<ul>
+<li>poor data security</li>
+<li>poor data consisitency</li>
+<li>errors with data entry</li>
+<li>data integrity
+<ul>
+<li>it is as it says it is</li>
+<li>True is True</li>
+<li>False is False</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>&quot;Don't want to do that&quot;</li>
+</ul>
+<h2 id="data-anomalies">Data Anomalies</h2>
+<ul>
+<li>Develop when not all data is kept away from redudancy
+<ul>
+<li>Updata Anomalies</li>
+<li>Insertion Anomalies</li>
+<li>Delete Anomalies</li>
+</ul>
+</li>
+<li>Pg 15 in the textbook
+<ul>
+<li>On the 3rd, row we have a typo</li>
+<li>The only way you know they are an agent is when they have a client
+<ul>
+<li>Insert Anomaly</li>
+</ul>
+</li>
+<li>What if we delete all customer from an agent
+<ul>
+<li>If we store redundant data this happens</li>
+<li>We need a table</li>
+<li>Delete Anomoly</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="db-system-environment-pt1">DB System Environment pt1</h2>
+<ul>
+<li>Procedures</li>
+<li>data</li>
+</ul>
+<h2 id="pt2">&quot;&quot; &quot;&quot; &quot;&quot; pt2</h2>
+<ul>
+<li>image from book, DB system environment</li>
+<li>don't pay attention to job titles</li>
+<li>DB admin, then System Admin
+<ul>
+<li>same thing probably</li>
+</ul>
+</li>
+</ul>
+<h2 id="dbms">DBMS</h2>
+<ul>
+<li>many user access control</li>
+</ul>
+<h2 id="manage-the-db-shift-in-focus">Manage the DB Shift in focus</h2>
+<ul>
+<li>costs money</li>
+<li>time</li>
+</ul>
+<h2 id="summary">Summary</h2>
+<ul>
+<li>Data consists of raw facts</li>
+</ul>
+<p><code>break time</code></p>
+<hr>
+<h2 id="access">Access</h2>
+<p>Where X is _____</p>
+<ul>
+<li>Location is Madrid OR Berlin</li>
+<li>You have the use of AND and OR and NOT
+<ul>
+<li>Logical &quot;Connectives&quot;</li>
+<li>just like in programming</li>
+</ul>
+</li>
+<li>All Customers who purchased an item in category 2</li>
+</ul>
+<h2 id="foreign-key">Foreign Key</h2>
+<p>&quot;The more you can push stuff to the user, the better off you are&quot;</p>
+
+</body>
+</html>
